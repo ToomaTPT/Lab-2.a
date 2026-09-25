@@ -1,3 +1,20 @@
+1.   
+
+**GNU nano 8.7.1                                 /etc/systemd/system/disk-report.service
+[Unit]
+Description=Append disk usage to log
+Documentation=man:df(1)
+After=local-fs.target
+
+[Service]
+Type=oneshot
+User=reports
+ExecStart=/usr/local/bin/disk-report.sh
+StandardOutput=append:/var/log/disk-report.log
+StandardError=append:/var/log/disk-report.log**
+
+
+
 2. i did not somehow run in to an error? atleast one desribed in the lesson work. i did get confused about the service account,
 that my output didnt match expected output, but using **sudo usermod -g 999 reports** it fixed it
 
@@ -14,8 +31,8 @@ Sat 2026-09-26 00:00:00 UTC  18h Fri 2026-09-25 05:33:27 UTC 2min 45s ago disk-r
 **Sep 24 06:20:13 rasmus systemd[1]: Starting disk-report.service - Append disk usage to log...
 Sep 24 06:20:13 rasmus systemd[1]: disk-report.service: Deactivated successfully.**
 
-6. Becouse the reprts user was created with those setting to prevent unnecessary home directory. if there was a home directory
-and the reports user was compromised by hackers it could alow attackers to place and store possibly malicious files
+6. Becouse the reports user was created with those setting to prevent an unnecessary home directory. if there was a home directory
+and the reports user was compromised by hackers it could allow attackers to place and store possibly malicious files
 
 **rasmus@rasmus:~$ systemctl show disk-report.service -p User
 User=reports
