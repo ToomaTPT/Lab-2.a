@@ -1,1 +1,39 @@
+2. i did not somehow run in to an error? atleast one desribed in the lesson work. i did get confused about the service account
+that my putput didnt match expected output but using "sudo usermod -g 999 reports" it fixed it
+
+3. Well i didn thvae the problem but i would use chown since it looks easier to use and automates the problem for me,
+maybe thast why i dint run in to error since i used it before verying if ran correcly.
+
+4.
+
+NEXT                        LEFT LAST                              PASSED UNIT              ACTIVATES
+Sat 2026-09-26 00:00:00 UTC  18h Fri 2026-09-25 05:33:27 UTC 2min 45s ago disk-report.timer disk-report.service
+
+5.
+
+Sep 24 06:20:13 rasmus systemd[1]: Starting disk-report.service - Append disk usage to log...
+Sep 24 06:20:13 rasmus systemd[1]: disk-report.service: Deactivated successfully.
+
+6. Becouse the reprts user was created with those setting to prevent unnecessary home directory. if there was a home directory
+and the reports user was compromised by hackers it could alow attackers to place and store possibly malicious files
+
+rasmus@rasmus:~$ systemctl show disk-report.service -p User
+User=reports
+rasmus@rasmus:~$ systemctl is-enabled disk-report.service
+systemctl is-enabled disk-report.timer
+static
+enabled
+rasmus@rasmus:~$ systemctl list-timers disk-report.timer
+NEXT                        LEFT LAST                           PASSED UNIT              ACTIVATES
+Fri 2026-09-25 00:00:00 UTC  17h Thu 2026-09-24 06:20:13 UTC 14min ago disk-report.timer disk-report.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.
+rasmus@rasmus:~$ systemctl list-timers disk-report.timer
+NEXT                        LEFT LAST                           PASSED UNIT              ACTIVATES
+Fri 2026-09-25 00:00:00 UTC  17h Thu 2026-09-24 06:20:13 UTC 14min ago disk-report.timer disk-report.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.
+rasmus@rasmus:~$
 
